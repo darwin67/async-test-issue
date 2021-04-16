@@ -1,0 +1,155 @@
+---- controllers::v1::node_role::create_assignment_request::can_create stdout ----
+thread 'controllers::v1::node_role::create_assignment_request::can_create' panicked at 'assertion failed: `(left == right)`
+  left: `1`,
+ right: `0`', /home/darwin/.cargo/registry/src/github.com-1ecc6299db9ec823/diesel-1.4.6/src/connection/mod.rs:118:9
+stack backtrace:
+   0:     0x55a39960e2a0 - std::backtrace_rs::backtrace::libunwind::trace::h5e9d00f0cdf4f57e
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/std/src/../../backtrace/src/backtrace/libunwind.rs:90:5
+   1:     0x55a39960e2a0 - std::backtrace_rs::backtrace::trace_unsynchronized::hd5302bd66215dab9
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/std/src/../../backtrace/src/backtrace/mod.rs:66:5
+   2:     0x55a39960e2a0 - std::sys_common::backtrace::_print_fmt::ha0237cd11a34e2bf
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/std/src/sys_common/backtrace.rs:67:5
+   3:     0x55a39960e2a0 - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::h171d4c10df1a98ee
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/std/src/sys_common/backtrace.rs:46:22
+   4:     0x55a39963124c - core::fmt::write::h89e4288724daa3fa
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/core/src/fmt/mod.rs:1096:17
+   5:     0x55a399606432 - std::io::Write::write_fmt::h61989113371c2355
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/std/src/io/mod.rs:1568:15
+   6:     0x55a399610555 - std::sys_common::backtrace::_print::h0c0b93221682afc8
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/std/src/sys_common/backtrace.rs:49:5
+   7:     0x55a399610555 - std::sys_common::backtrace::print::h57a9f95204c2fdd6
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/std/src/sys_common/backtrace.rs:36:9
+   8:     0x55a399610555 - std::panicking::default_hook::{{closure}}::h4245258b50e37e69
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/std/src/panicking.rs:208:50
+   9:     0x55a3996100eb - std::panicking::default_hook::h7b00dcc1d0944747
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/std/src/panicking.rs:222:9
+  10:     0x55a399610cf1 - std::panicking::rust_panic_with_hook::h71e6a073d87de1f5
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/std/src/panicking.rs:591:17
+  11:     0x55a399610837 - std::panicking::begin_panic_handler::{{closure}}::hd549436f6bb6dbb8
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/std/src/panicking.rs:497:13
+  12:     0x55a39960e73c - std::sys_common::backtrace::__rust_end_short_backtrace::h4e5f4b72b04174c3
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/std/src/sys_common/backtrace.rs:141:18
+  13:     0x55a399610799 - rust_begin_unwind
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/std/src/panicking.rs:493:5
+  14:     0x55a39962e991 - core::panicking::panic_fmt::hcd56f7f635f62c74
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/core/src/panicking.rs:92:14
+  15:     0x55a3987bd1a7 - diesel::connection::Connection::begin_test_transaction::h76077e1593c82a07
+                               at /home/darwin/.cargo/registry/src/github.com-1ecc6299db9ec823/diesel-1.4.6/src/connection/mod.rs:118:9
+  16:     0x55a3987bf774 - integration::controllers::v1::node_role::create_assignment_request::can_create::{{closure}}::h61d12cfd46045f47
+                               at /home/darwin/workspace/zinc/tests/controllers/v1/node_role.rs:90:9
+  17:     0x55a3987c4789 - <core::future::from_generator::GenFuture<T> as core::future::future::Future>::poll::h10fa52a656f50abe
+                               at /home/darwin/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/future/mod.rs:80:19
+  18:     0x55a3987b1676 - <tokio::task::local::RunUntil<T> as core::future::future::Future>::poll::{{closure}}::{{closure}}::h7d7d19ee5b814860
+                               at /home/darwin/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-1.5.0/src/task/local.rs:634:65
+  19:     0x55a3987db1c6 - tokio::coop::with_budget::{{closure}}::hb9b374353fdd5151
+                               at /home/darwin/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-1.5.0/src/coop.rs:106:9
+  20:     0x55a3987eb575 - std::thread::local::LocalKey<T>::try_with::hce862bf103403e74
+                               at /home/darwin/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/thread/local.rs:272:16
+  21:     0x55a3987e72dd - std::thread::local::LocalKey<T>::with::h913c7fb61c8cae8f
+                               at /home/darwin/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/thread/local.rs:248:9
+  22:     0x55a3987b0b27 - tokio::coop::with_budget::h981b116adede5612
+                               at /home/darwin/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-1.5.0/src/coop.rs:99:5
+  23:     0x55a3987b0b27 - tokio::coop::budget::hd3b5f45cb18fe740
+                               at /home/darwin/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-1.5.0/src/coop.rs:76:5
+  24:     0x55a3987b0b27 - <tokio::task::local::RunUntil<T> as core::future::future::Future>::poll::{{closure}}::hd1a776dfcce3b86e
+                               at /home/darwin/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-1.5.0/src/task/local.rs:634:42
+  25:     0x55a3987b225a - tokio::macros::scoped_tls::ScopedKey<T>::set::h4632e9d0c436d86a
+                               at /home/darwin/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-1.5.0/src/macros/scoped_tls.rs:61:9
+  26:     0x55a3987ad9b1 - tokio::task::local::LocalSet::with::h239e856988a216a1
+                               at /home/darwin/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-1.5.0/src/task/local.rs:548:9
+  27:     0x55a3987affe2 - <tokio::task::local::RunUntil<T> as core::future::future::Future>::poll::hdeb24098e6d33d42
+                               at /home/darwin/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-1.5.0/src/task/local.rs:624:9
+  28:     0x55a3987ae5db - tokio::task::local::LocalSet::run_until::{{closure}}::h155e9d59d6bc6c53
+                               at /home/darwin/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-1.5.0/src/task/local.rs:498:9
+  29:     0x55a3987c4ed9 - <core::future::from_generator::GenFuture<T> as core::future::future::Future>::poll::haa3ebde65a4b08ac
+                               at /home/darwin/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/future/mod.rs:80:19
+  30:     0x55a3987b58a2 - <core::pin::Pin<P> as core::future::future::Future>::poll::h3a17239c8e24fdde
+                               at /home/darwin/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/future/future.rs:119:9
+  31:     0x55a3987ccc23 - tokio::runtime::basic_scheduler::Inner<P>::block_on::{{closure}}::{{closure}}::h69d448a168e485e9
+                               at /home/darwin/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-1.5.0/src/runtime/basic_scheduler.rs:213:62
+  32:     0x55a3987daf86 - tokio::coop::with_budget::{{closure}}::hb3d92cf166313269
+                               at /home/darwin/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-1.5.0/src/coop.rs:106:9
+  33:     0x55a3987e7f65 - std::thread::local::LocalKey<T>::try_with::h0dbaa50c76630e1e
+                               at /home/darwin/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/thread/local.rs:272:16
+  34:     0x55a3987e688d - std::thread::local::LocalKey<T>::with::h3568e07c26e174a6
+                               at /home/darwin/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/thread/local.rs:248:9
+  35:     0x55a3987c6949 - tokio::coop::with_budget::h83a76bea748b9d9f
+                               at /home/darwin/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-1.5.0/src/coop.rs:99:5
+  36:     0x55a3987c6949 - tokio::coop::budget::h1832180bd5b74a69
+                               at /home/darwin/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-1.5.0/src/coop.rs:76:5
+  37:     0x55a3987c6949 - tokio::runtime::basic_scheduler::Inner<P>::block_on::{{closure}}::h0298f8f2cc420c64
+                               at /home/darwin/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-1.5.0/src/runtime/basic_scheduler.rs:213:39
+  38:     0x55a3987d1ca4 - tokio::runtime::basic_scheduler::enter::{{closure}}::h9cef2f42db37759e
+                               at /home/darwin/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-1.5.0/src/runtime/basic_scheduler.rs:323:29
+  39:     0x55a3987b2b8a - tokio::macros::scoped_tls::ScopedKey<T>::set::hd0f79433652aef87
+                               at /home/darwin/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-1.5.0/src/macros/scoped_tls.rs:61:9
+  40:     0x55a3987d1166 - tokio::runtime::basic_scheduler::enter::h9c1a4e391620ed11
+                               at /home/darwin/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-1.5.0/src/runtime/basic_scheduler.rs:323:5
+  41:     0x55a3987c65eb - tokio::runtime::basic_scheduler::Inner<P>::block_on::h1c41486a5bea94a7
+                               at /home/darwin/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-1.5.0/src/runtime/basic_scheduler.rs:202:9
+  42:     0x55a3987cd4dd - tokio::runtime::basic_scheduler::InnerGuard<P>::block_on::hcfc46e1b9be8c9b2
+                               at /home/darwin/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-1.5.0/src/runtime/basic_scheduler.rs:481:9
+  43:     0x55a3987cd676 - tokio::runtime::basic_scheduler::BasicScheduler<P>::block_on::h010b9fa5eef2dc7b
+                               at /home/darwin/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-1.5.0/src/runtime/basic_scheduler.rs:162:24
+  44:     0x55a3987de5bc - tokio::runtime::Runtime::block_on::h2f00e6560ba35645
+                               at /home/darwin/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-1.5.0/src/runtime/mod.rs:450:46
+  45:     0x55a3987adcda - tokio::task::local::LocalSet::block_on::h081b46b0e90f132d
+                               at /home/darwin/.cargo/registry/src/github.com-1ecc6299db9ec823/tokio-1.5.0/src/task/local.rs:459:9
+  46:     0x55a3987d26b1 - actix_rt::runtime::Runtime::block_on::h79a5a6b16b0e8084
+                               at /home/darwin/.cargo/registry/src/github.com-1ecc6299db9ec823/actix-rt-2.2.0/src/runtime.rs:85:9
+  47:     0x55a3987d231b - actix_rt::system::SystemRunner::block_on::h5164175ff56f6d7a
+                               at /home/darwin/.cargo/registry/src/github.com-1ecc6299db9ec823/actix-rt-2.2.0/src/system.rs:186:9
+  48:     0x55a3987b45a9 - integration::controllers::v1::node_role::create_assignment_request::can_create::h7d0ceb8e09ec599e
+                               at /home/darwin/workspace/zinc/tests/controllers/v1/node_role.rs:86:5
+  49:     0x55a3987bf57a - integration::controllers::v1::node_role::create_assignment_request::can_create::{{closure}}::h60d70e3c8f9c6676
+                               at /home/darwin/workspace/zinc/tests/controllers/v1/node_role.rs:86:5
+  50:     0x55a3987abb1e - core::ops::function::FnOnce::call_once::hd94a0311f465bba3
+                               at /home/darwin/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ops/function.rs:227:5
+  51:     0x55a39881a0d3 - core::ops::function::FnOnce::call_once::h39334accff073405
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/core/src/ops/function.rs:227:5
+  52:     0x55a39881a0d3 - test::__rust_begin_short_backtrace::h67066ecbe74d57fb
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/test/src/lib.rs:557:5
+  53:     0x55a398818791 - <alloc::boxed::Box<F,A> as core::ops::function::FnOnce<Args>>::call_once::h1a2fa75e4663d5fb
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/alloc/src/boxed.rs:1521:9
+  54:     0x55a398818791 - <std::panic::AssertUnwindSafe<F> as core::ops::function::FnOnce<()>>::call_once::h51ed23ef8108a70b
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/std/src/panic.rs:344:9
+  55:     0x55a398818791 - std::panicking::try::do_call::ha481e088fadbcefb
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/std/src/panicking.rs:379:40
+  56:     0x55a398818791 - std::panicking::try::h79dbf3ffc900b110
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/std/src/panicking.rs:343:19
+  57:     0x55a398818791 - std::panic::catch_unwind::hd5e087ec559ee8c6
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/std/src/panic.rs:431:14
+  58:     0x55a398818791 - test::run_test_in_process::h84f8f1a053afd5c9
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/test/src/lib.rs:579:18
+  59:     0x55a398818791 - test::run_test::run_test_inner::{{closure}}::h5ab37355828267a7
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/test/src/lib.rs:487:39
+  60:     0x55a3987f00f6 - std::sys_common::backtrace::__rust_begin_short_backtrace::hdbdda9b291bb4f07
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/std/src/sys_common/backtrace.rs:125:18
+  61:     0x55a3987f488d - std::thread::Builder::spawn_unchecked::{{closure}}::{{closure}}::hc46a4b3ec40c9eed
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/std/src/thread/mod.rs:474:17
+  62:     0x55a3987f488d - <std::panic::AssertUnwindSafe<F> as core::ops::function::FnOnce<()>>::call_once::h05957c6c69ac6289
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/std/src/panic.rs:344:9
+  63:     0x55a3987f488d - std::panicking::try::do_call::h8bc73718b8794c20
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/std/src/panicking.rs:379:40
+  64:     0x55a3987f488d - std::panicking::try::h5b8d8bd1a29e08ec
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/std/src/panicking.rs:343:19
+  65:     0x55a3987f488d - std::panic::catch_unwind::hc7d07542f03f4fe0
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/std/src/panic.rs:431:14
+  66:     0x55a3987f488d - std::thread::Builder::spawn_unchecked::{{closure}}::hc18fb3dc9d95423d
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/std/src/thread/mod.rs:473:30
+  67:     0x55a3987f488d - core::ops::function::FnOnce::call_once{{vtable.shim}}::h41e1c7de77e3395e
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/core/src/ops/function.rs:227:5
+  68:     0x55a3996177ba - <alloc::boxed::Box<F,A> as core::ops::function::FnOnce<Args>>::call_once::h61144a2be4ee36d8
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/alloc/src/boxed.rs:1521:9
+  69:     0x55a3996177ba - <alloc::boxed::Box<F,A> as core::ops::function::FnOnce<Args>>::call_once::hcf5d395fdd120c17
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/alloc/src/boxed.rs:1521:9
+  70:     0x55a3996177ba - std::sys::unix::thread::Thread::new::thread_start::hb5e40d3d934ebb7a
+                               at /rustc/2fd73fabe469357a12c2c974c140f67e7cdd76d0/library/std/src/sys/unix/thread.rs:71:17
+  71:     0x7f286f113299 - start_thread
+  72:     0x7f286eeee053 - clone
+  73:                0x0 - <unknown>
+
+
+failures:
+    controllers::v1::node_role::create_assignment_request::can_create
+
