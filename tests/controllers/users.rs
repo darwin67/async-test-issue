@@ -1,6 +1,6 @@
 use crate::common;
 use actix_web::{http, web};
-use asynctest::controllers::users::Endpoint;
+use asynctest::controllers::users::{Endpoint, UserInfo};
 use asynctest::models::user::UserFactory;
 use asynctest::{
     config::database::{DbConn, DbPool},
@@ -131,54 +131,6 @@ mod list {
             assert_eq!(list["data"].as_array().unwrap().len(), users.len());
         }
     }
-
-    #[actix_rt::test]
-    async fn return_list_of_users6() {
-        common::setup();
-
-        let conn = DbPool::conn();
-        conn.begin_test_transaction()
-            .expect(common::TEST_TX_ERR_MSG);
-
-        let mut users = vec![];
-        for _ in 0..5 {
-            users.push(UserFactory::new().create(&conn));
-        }
-
-        let result = Endpoint::list(DbConn::with(conn)).await;
-        assert!(result.is_ok());
-
-        if let Ok(resp) = result {
-            assert_eq!(resp.status(), http::StatusCode::OK);
-
-            let list = resp.body().as_json();
-            assert_eq!(list["data"].as_array().unwrap().len(), users.len());
-        }
-    }
-
-    #[actix_rt::test]
-    async fn return_list_of_users7() {
-        common::setup();
-
-        let conn = DbPool::conn();
-        conn.begin_test_transaction()
-            .expect(common::TEST_TX_ERR_MSG);
-
-        let mut users = vec![];
-        for _ in 0..5 {
-            users.push(UserFactory::new().create(&conn));
-        }
-
-        let result = Endpoint::list(DbConn::with(conn)).await;
-        assert!(result.is_ok());
-
-        if let Ok(resp) = result {
-            assert_eq!(resp.status(), http::StatusCode::OK);
-
-            let list = resp.body().as_json();
-            assert_eq!(list["data"].as_array().unwrap().len(), users.len());
-        }
-    }
 }
 
 mod create {
@@ -266,6 +218,94 @@ mod create {
 
         if let Ok(resp) = result {
             assert_eq!(resp.status(), http::StatusCode::CREATED);
+        }
+    }
+}
+
+mod show {
+    use super::*;
+
+    #[actix_rt::test]
+    async fn show_a_user() {
+        common::setup();
+        let conn = DbPool::conn();
+        conn.begin_test_transaction()
+            .expect(common::TEST_TX_ERR_MSG);
+
+        let user = UserFactory::new().create(&conn);
+        let info = UserInfo { id: user.id };
+
+        let result = Endpoint::show(DbConn::with(conn), web::Path(info)).await;
+        assert!(result.is_ok());
+
+        if let Ok(resp) = result {
+            assert_eq!(resp.status(), http::StatusCode::OK);
+
+            let body = resp.body().as_json();
+            assert_eq!(body["data"]["name"], json!(user.name));
+        }
+    }
+
+    #[actix_rt::test]
+    async fn show_a_user2() {
+        common::setup();
+        let conn = DbPool::conn();
+        conn.begin_test_transaction()
+            .expect(common::TEST_TX_ERR_MSG);
+
+        let user = UserFactory::new().create(&conn);
+        let info = UserInfo { id: user.id };
+
+        let result = Endpoint::show(DbConn::with(conn), web::Path(info)).await;
+        assert!(result.is_ok());
+
+        if let Ok(resp) = result {
+            assert_eq!(resp.status(), http::StatusCode::OK);
+
+            let body = resp.body().as_json();
+            assert_eq!(body["data"]["name"], json!(user.name));
+        }
+    }
+
+    #[actix_rt::test]
+    async fn show_a_user3() {
+        common::setup();
+        let conn = DbPool::conn();
+        conn.begin_test_transaction()
+            .expect(common::TEST_TX_ERR_MSG);
+
+        let user = UserFactory::new().create(&conn);
+        let info = UserInfo { id: user.id };
+
+        let result = Endpoint::show(DbConn::with(conn), web::Path(info)).await;
+        assert!(result.is_ok());
+
+        if let Ok(resp) = result {
+            assert_eq!(resp.status(), http::StatusCode::OK);
+
+            let body = resp.body().as_json();
+            assert_eq!(body["data"]["name"], json!(user.name));
+        }
+    }
+
+    #[actix_rt::test]
+    async fn show_a_user4() {
+        common::setup();
+        let conn = DbPool::conn();
+        conn.begin_test_transaction()
+            .expect(common::TEST_TX_ERR_MSG);
+
+        let user = UserFactory::new().create(&conn);
+        let info = UserInfo { id: user.id };
+
+        let result = Endpoint::show(DbConn::with(conn), web::Path(info)).await;
+        assert!(result.is_ok());
+
+        if let Ok(resp) = result {
+            assert_eq!(resp.status(), http::StatusCode::OK);
+
+            let body = resp.body().as_json();
+            assert_eq!(body["data"]["name"], json!(user.name));
         }
     }
 }

@@ -2,6 +2,7 @@ use crate::config::database as db;
 use crate::models::factory::Factory;
 use crate::schema::users;
 use diesel::{prelude::*, result::Error};
+use rand::{distributions::Alphanumeric, Rng};
 use serde::{Deserialize, Serialize};
 use std::default::Default;
 
@@ -75,7 +76,7 @@ impl Factory<User, NewUser> for UserFactory {
     fn new() -> Self {
         Self {
             inner: NewUser {
-                name: Default::default(),
+                name: format!("user-{}", random_string(16)),
             },
         }
     }
@@ -92,4 +93,12 @@ impl Factory<User, NewUser> for UserFactory {
             .save(conn)
             .expect("Failed to create user with UserFactory")
     }
+}
+
+fn random_string(size: usize) -> String {
+    rand::thread_rng()
+        .sample_iter(&Alphanumeric)
+        .take(size)
+        .map(char::from)
+        .collect()
 }
