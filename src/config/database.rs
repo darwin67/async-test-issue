@@ -49,6 +49,7 @@ impl DbPool {
 pub fn init() {
     lazy_static::initialize(&POOL);
     let conn = DbPool::conn();
+    println!("Initializing database");
 
     embedded_migrations::run_with_output(&conn, &mut std::io::stdout())
         .expect("Failed to run migrations");

@@ -2,15 +2,21 @@ use crate::config::database as db;
 use crate::models::factory::Factory;
 use crate::schema::users;
 use diesel::{prelude::*, result::Error};
+use serde::{Deserialize, Serialize};
 use std::default::Default;
 
-#[derive(Debug, Clone, Queryable)]
+#[derive(Debug, Clone, Queryable, Serialize)]
 pub struct User {
     pub id: i32,
     pub name: String,
 }
 
 impl User {
+    pub fn get_all(conn: &db::DBConnection) -> Vec<User> {
+        use crate::schema::users::dsl::users;
+        users.load(conn).unwrap()
+    }
+
     pub fn get_by_id(conn: &db::DBConnection, id: i32) -> Option<User> {
         use crate::schema::users::dsl::users;
 
@@ -28,9 +34,14 @@ impl User {
             Err(_) => None,
         }
     }
+
+    pub fn delete(conn: &db::DBConnection, id: i32) -> Result<(), Error> {
+        use crate::schema::users::dsl::users;
+        conn.transaction(|| diesel::delete(users.find(id)).execute(conn).map(|_| ()))
+    }
 }
 
-#[derive(Debug, Clone, Insertable, Default)]
+#[derive(Debug, Clone, Insertable, Default, Deserialize)]
 #[table_name = "users"]
 pub struct NewUser {
     pub name: String,

@@ -314,6 +314,7 @@ version = "0.1.0"
 dependencies = [
  "actix-rt 2.2.0",
  "actix-web",
+ "derive_more",
  "diesel",
  "diesel_migrations",
  "dotenv",
