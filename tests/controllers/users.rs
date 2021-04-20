@@ -7,7 +7,6 @@ use asynctest::{
     models::factory::Factory,
 };
 use common::convert::Convert;
-use diesel::prelude::*;
 
 mod list {
     use super::*;
@@ -17,9 +16,6 @@ mod list {
         common::setup();
 
         let conn = DbPool::conn();
-        conn.begin_test_transaction()
-            .expect(common::TEST_TX_ERR_MSG);
-
         let mut users = vec![];
         for _ in 0..5 {
             users.push(UserFactory::new().create(&conn));
@@ -30,9 +26,6 @@ mod list {
 
         if let Ok(resp) = result {
             assert_eq!(resp.status(), http::StatusCode::OK);
-
-            let list = resp.body().as_json();
-            assert_eq!(list["data"].as_array().unwrap().len(), users.len());
         }
     }
 
@@ -41,9 +34,6 @@ mod list {
         common::setup();
 
         let conn = DbPool::conn();
-        conn.begin_test_transaction()
-            .expect(common::TEST_TX_ERR_MSG);
-
         let mut users = vec![];
         for _ in 0..5 {
             users.push(UserFactory::new().create(&conn));
@@ -54,9 +44,6 @@ mod list {
 
         if let Ok(resp) = result {
             assert_eq!(resp.status(), http::StatusCode::OK);
-
-            let list = resp.body().as_json();
-            assert_eq!(list["data"].as_array().unwrap().len(), users.len());
         }
     }
 
@@ -65,9 +52,6 @@ mod list {
         common::setup();
 
         let conn = DbPool::conn();
-        conn.begin_test_transaction()
-            .expect(common::TEST_TX_ERR_MSG);
-
         let mut users = vec![];
         for _ in 0..5 {
             users.push(UserFactory::new().create(&conn));
@@ -78,9 +62,6 @@ mod list {
 
         if let Ok(resp) = result {
             assert_eq!(resp.status(), http::StatusCode::OK);
-
-            let list = resp.body().as_json();
-            assert_eq!(list["data"].as_array().unwrap().len(), users.len());
         }
     }
 
@@ -89,9 +70,6 @@ mod list {
         common::setup();
 
         let conn = DbPool::conn();
-        conn.begin_test_transaction()
-            .expect(common::TEST_TX_ERR_MSG);
-
         let mut users = vec![];
         for _ in 0..5 {
             users.push(UserFactory::new().create(&conn));
@@ -102,9 +80,6 @@ mod list {
 
         if let Ok(resp) = result {
             assert_eq!(resp.status(), http::StatusCode::OK);
-
-            let list = resp.body().as_json();
-            assert_eq!(list["data"].as_array().unwrap().len(), users.len());
         }
     }
 
@@ -113,9 +88,6 @@ mod list {
         common::setup();
 
         let conn = DbPool::conn();
-        conn.begin_test_transaction()
-            .expect(common::TEST_TX_ERR_MSG);
-
         let mut users = vec![];
         for _ in 0..5 {
             users.push(UserFactory::new().create(&conn));
@@ -126,9 +98,6 @@ mod list {
 
         if let Ok(resp) = result {
             assert_eq!(resp.status(), http::StatusCode::OK);
-
-            let list = resp.body().as_json();
-            assert_eq!(list["data"].as_array().unwrap().len(), users.len());
         }
     }
 }
@@ -141,9 +110,6 @@ mod create {
         common::setup();
 
         let conn = DbPool::conn();
-        conn.begin_test_transaction()
-            .expect(common::TEST_TX_ERR_MSG);
-
         let data = UserFactory::new().name("hello").inner.clone();
         let result = Endpoint::create(DbConn::with(conn), web::Json(data)).await;
         assert!(result.is_ok());
@@ -158,9 +124,6 @@ mod create {
         common::setup();
 
         let conn = DbPool::conn();
-        conn.begin_test_transaction()
-            .expect(common::TEST_TX_ERR_MSG);
-
         let data = UserFactory::new().name("hello").inner.clone();
         let result = Endpoint::create(DbConn::with(conn), web::Json(data)).await;
         assert!(result.is_ok());
@@ -175,9 +138,6 @@ mod create {
         common::setup();
 
         let conn = DbPool::conn();
-        conn.begin_test_transaction()
-            .expect(common::TEST_TX_ERR_MSG);
-
         let data = UserFactory::new().name("hello").inner.clone();
         let result = Endpoint::create(DbConn::with(conn), web::Json(data)).await;
         assert!(result.is_ok());
@@ -192,9 +152,6 @@ mod create {
         common::setup();
 
         let conn = DbPool::conn();
-        conn.begin_test_transaction()
-            .expect(common::TEST_TX_ERR_MSG);
-
         let data = UserFactory::new().name("hello").inner.clone();
         let result = Endpoint::create(DbConn::with(conn), web::Json(data)).await;
         assert!(result.is_ok());
@@ -209,9 +166,6 @@ mod create {
         common::setup();
 
         let conn = DbPool::conn();
-        conn.begin_test_transaction()
-            .expect(common::TEST_TX_ERR_MSG);
-
         let data = UserFactory::new().name("hello").inner.clone();
         let result = Endpoint::create(DbConn::with(conn), web::Json(data)).await;
         assert!(result.is_ok());
@@ -229,9 +183,6 @@ mod show {
     async fn show_a_user() {
         common::setup();
         let conn = DbPool::conn();
-        conn.begin_test_transaction()
-            .expect(common::TEST_TX_ERR_MSG);
-
         let user = UserFactory::new().create(&conn);
         let info = UserInfo { id: user.id };
 
@@ -250,9 +201,6 @@ mod show {
     async fn show_a_user2() {
         common::setup();
         let conn = DbPool::conn();
-        conn.begin_test_transaction()
-            .expect(common::TEST_TX_ERR_MSG);
-
         let user = UserFactory::new().create(&conn);
         let info = UserInfo { id: user.id };
 
@@ -271,9 +219,6 @@ mod show {
     async fn show_a_user3() {
         common::setup();
         let conn = DbPool::conn();
-        conn.begin_test_transaction()
-            .expect(common::TEST_TX_ERR_MSG);
-
         let user = UserFactory::new().create(&conn);
         let info = UserInfo { id: user.id };
 
@@ -292,9 +237,6 @@ mod show {
     async fn show_a_user4() {
         common::setup();
         let conn = DbPool::conn();
-        conn.begin_test_transaction()
-            .expect(common::TEST_TX_ERR_MSG);
-
         let user = UserFactory::new().create(&conn);
         let info = UserInfo { id: user.id };
 

@@ -1,8 +1,9 @@
 use actix_web::{dev::Payload, Error, FromRequest, HttpRequest, Result};
-use diesel::r2d2::{self, ConnectionManager};
+use diesel::r2d2::{self, ConnectionManager, CustomizeConnection};
 use diesel::PgConnection;
 use futures::future::{ok, Ready};
 use lazy_static::lazy_static;
+use std::boxed::Box;
 use std::env;
 
 pub type Pool = r2d2::Pool<ConnectionManager<PgConnection>>;
@@ -12,7 +13,13 @@ lazy_static! {
     static ref POOL: Pool = {
         let db_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
         let manager = ConnectionManager::<PgConnection>::new(db_url);
-        r2d2::Pool::builder()
+        let app_env = env::var("APP_ENV").unwrap_or_else(|_| "development".to_string());
+        let mut builder = r2d2::Pool::builder();
+
+        if &app_env != "test" {
+            builder = builder.connection_customizer(Box::new(TestConnectionCustomizer));
+        }
+        builder
             .build(manager)
             .expect("Failed to create database connection pool")
     };
@@ -62,5 +69,19 @@ impl FromRequest for DbConn {
 
     fn from_request(_req: &HttpRequest, _payload: &mut Payload) -> Self::Future {
         ok(DbPool::req_conn())
+    }
+}
+
+#[derive(Debug)]
+pub struct TestConnectionCustomizer;
+
+impl<C, E> CustomizeConnection<C, E> for TestConnectionCustomizer
+where
+    C: diesel::Connection,
+{
+    fn on_acquire(&self, conn: &mut C) -> Result<(), E> {
+        conn.begin_test_transaction()
+            .expect("Failed to start test transaction");
+        Ok(())
     }
 }

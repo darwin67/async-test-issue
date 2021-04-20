@@ -12,8 +12,6 @@ lazy_static! {
     static ref INIT: Once = Once::new();
 }
 
-pub const TEST_TX_ERR_MSG: &str = "Failed to start test transaction";
-
 pub fn setup() {
     INIT.call_once(|| {
         dotenv().ok();
